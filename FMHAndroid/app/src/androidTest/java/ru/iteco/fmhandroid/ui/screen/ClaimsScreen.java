@@ -4,6 +4,7 @@ import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.swipeUp;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
@@ -12,7 +13,9 @@ import androidx.test.espresso.ViewInteraction;
 import androidx.test.espresso.contrib.RecyclerViewActions;
 
 import ru.iteco.fmhandroid.R;
+import ru.iteco.fmhandroid.ui.data.ClaimsDataHelper;
 import ru.iteco.fmhandroid.ui.utils.CustomViewMatcher;
+import ru.iteco.fmhandroid.ui.utils.RecyclerViewAssertions;
 
 public class ClaimsScreen {
 
@@ -34,8 +37,9 @@ public class ClaimsScreen {
         addClaimButton.perform(click());
     }
 
-    public void findCreatedClaimInLastPosition() {
+    public void findCreatedClaimInLastPosition(ClaimsDataHelper.ClaimsInfo info) {
         int itemCount = CustomViewMatcher.getCountFromRecyclerView(R.id.claim_list_recycler_view);
+        //claimList.check(matches(CustomViewMatcher.atPosition(itemCount-1, hasDescendant(withText(info.getTextField())))));
         claimList.perform(RecyclerViewActions.actionOnItemAtPosition(itemCount - 1, click()));
     }
 
@@ -53,15 +57,17 @@ public class ClaimsScreen {
         okButton.perform(click());
     }
 
-    public void checkFirstThreeCancelledClaimsAfterFilter() {
+    public void checkFirstThreeCancelledClaimsAfterFilter() throws InterruptedException {
         ClaimInfoScreen claimInfoScreen = new ClaimInfoScreen();
         claimList.perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
         claimInfoScreen.status.check(matches(withText("Canceled")));
         claimInfoScreen.commentsList.perform(swipeUp());
         claimInfoScreen.goBackButton.perform(click());
+        Thread.sleep(1000);
         claimList.perform(RecyclerViewActions.actionOnItemAtPosition(1, click()));
         claimInfoScreen.status.check(matches(withText("Canceled")));
         claimInfoScreen.goBackButton.perform(click());
+        Thread.sleep(1000);
         claimList.perform(RecyclerViewActions.actionOnItemAtPosition(2, click()));
         claimInfoScreen.status.check(matches(withText("Canceled")));
         claimInfoScreen.goBackButton.perform(click());

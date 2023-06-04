@@ -11,6 +11,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import io.qameta.allure.android.runners.AllureAndroidJUnit4;
 import ru.iteco.fmhandroid.ui.AppActivity;
 import ru.iteco.fmhandroid.ui.data.AuthDataHelper;
 import ru.iteco.fmhandroid.ui.screen.AboutScreen;
@@ -21,7 +22,7 @@ import ru.iteco.fmhandroid.ui.screen.MainScreen;
 import ru.iteco.fmhandroid.ui.screen.NewsScreen;
 
 @LargeTest
-@RunWith(AndroidJUnit4.class)
+@RunWith(AllureAndroidJUnit4.class)
 public class NavigationTest {
 
     @Rule
@@ -30,14 +31,14 @@ public class NavigationTest {
 
     @Before
     public void setUp() throws InterruptedException {
-        Thread.sleep(5000);
+        Thread.sleep(8000);
         try {
             authorizationScreen.checkAuthScreenHeader();
         } catch (NoMatchingViewException e) {
             mainScreen.logout();
         }
         authorizationScreen.login(AuthDataHelper.getCorrectAuthInfo());
-        Thread.sleep(1000);
+        Thread.sleep(3000);
         mainScreen.appNameVisible();
     }
 
@@ -49,15 +50,20 @@ public class NavigationTest {
     LoveIsAllScreen loveIsAllScreen = new LoveIsAllScreen();
 
     @Test
-    public void navigationTest() {
+    public void navigationTest() throws InterruptedException {
         mainScreen.goToNewsScreenFromMainMenu();
+        //Thread.sleep(300);
         newsScreen.checkNewsScreen();
         mainScreen.goToClaimsScreenFromMainMenu();
+        //Thread.sleep(300);
         claimsScreen.checkClaimsScreen();
         mainScreen.goToAboutScreenFromMainMenu();
+        //Thread.sleep(300);
         aboutScreen.checkAboutScreen();
         aboutScreen.goBack();
+        //Thread.sleep(300);
         mainScreen.goToMainScreenFromMainMenu();
+        //Thread.sleep(300);
         mainScreen.appNameVisible();
     }
 

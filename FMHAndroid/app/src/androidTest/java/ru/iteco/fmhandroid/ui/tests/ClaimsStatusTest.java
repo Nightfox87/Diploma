@@ -10,6 +10,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import io.qameta.allure.android.runners.AllureAndroidJUnit4;
 import ru.iteco.fmhandroid.ui.AppActivity;
 import ru.iteco.fmhandroid.ui.data.AuthDataHelper;
 import ru.iteco.fmhandroid.ui.data.ClaimsDataHelper;
@@ -21,7 +22,7 @@ import ru.iteco.fmhandroid.ui.screen.EditingClaimsScreen;
 import ru.iteco.fmhandroid.ui.screen.MainScreen;
 
 @LargeTest
-@RunWith(AndroidJUnit4.class)
+@RunWith(AllureAndroidJUnit4.class)
 public class ClaimsStatusTest {
 
     @Rule
@@ -30,14 +31,14 @@ public class ClaimsStatusTest {
 
     @Before
     public void setUp() throws InterruptedException {
-        Thread.sleep(7000);
+        Thread.sleep(8000);
         try {
             authorizationScreen.checkAuthScreenHeader();
         } catch (NoMatchingViewException e) {
             mainScreen.logout();
         }
         authorizationScreen.login(AuthDataHelper.getCorrectAuthInfo());
-        Thread.sleep(1000);
+        Thread.sleep(3000);
         mainScreen.appNameVisible();
         mainScreen.goToClaimsScreen();
         claimsScreen.checkClaimsScreen();
@@ -58,7 +59,7 @@ public class ClaimsStatusTest {
         creatingClaimsScreen.saveClaim();
         claimsScreen.checkClaimsScreen();
         claimsScreen.filterInProgressClaims();
-        claimsScreen.findCreatedClaimInLastPosition();
+        claimsScreen.findCreatedClaimInLastPosition(ClaimsDataHelper.getInfoForExecutedStatus(8));
         claimInfoScreen.checkClaimInfoScreen();
         claimInfoScreen.checkClaim(ClaimsDataHelper.getInfoForExecutedStatus(8));
         claimInfoScreen.toExecuteClaimAndCheckStatus(ClaimsDataHelper.getFirstComment());
@@ -70,7 +71,7 @@ public class ClaimsStatusTest {
         creatingClaimsScreen.saveClaim();
         claimsScreen.checkClaimsScreen();
         claimsScreen.filterInProgressClaims();
-        claimsScreen.findCreatedClaimInLastPosition();
+        claimsScreen.findCreatedClaimInLastPosition(ClaimsDataHelper.getInfoForClaimEditing(8));
         claimInfoScreen.checkClaimInfoScreen();
         claimInfoScreen.checkClaim(ClaimsDataHelper.getInfoForClaimEditing(8));
         claimInfoScreen.throwOffClaimAndCheckStatus(ClaimsDataHelper.getSecondComment());
@@ -86,7 +87,7 @@ public class ClaimsStatusTest {
         creatingClaimsScreen.saveClaim();
         claimsScreen.checkClaimsScreen();
         claimsScreen.filterInProgressClaims();
-        claimsScreen.findCreatedClaimInLastPosition();
+        claimsScreen.findCreatedClaimInLastPosition(ClaimsDataHelper.getInfoForCancelledStatus(8));
         claimInfoScreen.checkClaimInfoScreen();
         claimInfoScreen.checkClaim(ClaimsDataHelper.getInfoForCancelledStatus(8));
         claimInfoScreen.throwOffClaimAndCheckStatus(ClaimsDataHelper.getThirdComment());

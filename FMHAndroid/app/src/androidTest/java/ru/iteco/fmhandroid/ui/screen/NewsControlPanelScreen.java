@@ -10,6 +10,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withParent;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.not;
 
 import androidx.test.espresso.ViewInteraction;
 import androidx.test.espresso.contrib.RecyclerViewActions;
@@ -68,10 +69,6 @@ public class NewsControlPanelScreen {
     }
 
     public void checkNewsDoesNotExist(NewsDataHelper.NewsInfo newsInfo) {
-        try {
-            newsList.check(RecyclerViewAssertions.withRowContaining(withText(newsInfo.getTextField())));
-        } catch (OutOfMemoryError e) {
-            System.out.println("News deleted");
-        }
+        newsList.check(matches(not(CustomViewMatcher.atPosition(0, withText(newsInfo.getTextField())))));
     }
 }

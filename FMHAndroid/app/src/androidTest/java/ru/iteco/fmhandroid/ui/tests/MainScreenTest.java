@@ -10,6 +10,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import io.qameta.allure.android.runners.AllureAndroidJUnit4;
 import ru.iteco.fmhandroid.ui.AppActivity;
 import ru.iteco.fmhandroid.ui.data.AuthDataHelper;
 import ru.iteco.fmhandroid.ui.screen.AuthorizationScreen;
@@ -19,7 +20,7 @@ import ru.iteco.fmhandroid.ui.screen.MainScreen;
 import ru.iteco.fmhandroid.ui.screen.NewsScreen;
 
 @LargeTest
-@RunWith(AndroidJUnit4.class)
+@RunWith(AllureAndroidJUnit4.class)
 public class MainScreenTest {
 
     @Rule
@@ -28,17 +29,16 @@ public class MainScreenTest {
 
     @Before
     public void setUp() throws InterruptedException {
-        Thread.sleep(5000);
+        Thread.sleep(8000);
         try {
             authorizationScreen.checkAuthScreenHeader();
         } catch (NoMatchingViewException e) {
             mainScreen.logout();
         }
         authorizationScreen.login(AuthDataHelper.getCorrectAuthInfo());
-        Thread.sleep(1000);
+        Thread.sleep(3000);
         mainScreen.appNameVisible();
     }
-
 
     MainScreen mainScreen = new MainScreen();
     AuthorizationScreen authorizationScreen = new AuthorizationScreen();
@@ -59,7 +59,7 @@ public class MainScreenTest {
     }
 
     @Test
-    public void goToClaimsScreenFromMainScreen() {
+    public void goToClaimsScreenFromMainScreen() throws InterruptedException {
         mainScreen.goToClaimsScreen();
         claimsScreen.checkClaimsScreen();
     }

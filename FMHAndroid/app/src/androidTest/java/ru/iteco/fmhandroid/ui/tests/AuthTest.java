@@ -10,13 +10,14 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import io.qameta.allure.android.runners.AllureAndroidJUnit4;
 import ru.iteco.fmhandroid.ui.AppActivity;
 import ru.iteco.fmhandroid.ui.data.AuthDataHelper;
 import ru.iteco.fmhandroid.ui.screen.AuthorizationScreen;
 import ru.iteco.fmhandroid.ui.screen.MainScreen;
 
 @LargeTest
-@RunWith(AndroidJUnit4.class)
+@RunWith(AllureAndroidJUnit4.class)
 public class AuthTest {
 
     @Rule
@@ -25,7 +26,7 @@ public class AuthTest {
 
     @Before
     public void setUp() throws InterruptedException {
-        Thread.sleep(5000);
+        Thread.sleep(8000);
         try {
             authorizationScreen.checkAuthScreenHeader();
         } catch (NoMatchingViewException e) {

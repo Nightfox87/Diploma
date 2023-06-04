@@ -10,6 +10,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import io.qameta.allure.android.runners.AllureAndroidJUnit4;
 import ru.iteco.fmhandroid.ui.AppActivity;
 import ru.iteco.fmhandroid.ui.data.AuthDataHelper;
 import ru.iteco.fmhandroid.ui.data.ClaimsDataHelper;
@@ -21,7 +22,7 @@ import ru.iteco.fmhandroid.ui.screen.CreatingClaimsScreen;
 import ru.iteco.fmhandroid.ui.screen.MainScreen;
 
 @LargeTest
-@RunWith(AndroidJUnit4.class)
+@RunWith(AllureAndroidJUnit4.class)
 public class ClaimsCommentTest {
 
     @Rule
@@ -30,14 +31,14 @@ public class ClaimsCommentTest {
 
     @Before
     public void setUp() throws InterruptedException {
-        Thread.sleep(7000);
+        Thread.sleep(8000);
         try {
             authorizationScreen.checkAuthScreenHeader();
         } catch (NoMatchingViewException e) {
             mainScreen.logout();
         }
         authorizationScreen.login(AuthDataHelper.getCorrectAuthInfo());
-        Thread.sleep(1000);
+        Thread.sleep(3000);
         mainScreen.appNameVisible();
     }
 
@@ -50,7 +51,7 @@ public class ClaimsCommentTest {
 
 
     @Test
-    public void addCommentToClaim() {
+    public void addCommentToClaim() throws InterruptedException {
         mainScreen.goToClaimsScreen();
         claimsScreen.checkClaimsScreen();
         claimsScreen.goToCreatingClaim();
@@ -59,7 +60,7 @@ public class ClaimsCommentTest {
         creatingClaimsScreen.saveClaim();
         claimsScreen.checkClaimsScreen();
         claimsScreen.filterInProgressClaims();
-        claimsScreen.findCreatedClaimInLastPosition();
+        claimsScreen.findCreatedClaimInLastPosition(ClaimsDataHelper.getInfoForClaimWithComment(8));
         claimInfoScreen.checkClaimInfoScreen();
         claimInfoScreen.checkClaim(ClaimsDataHelper.getInfoForClaimWithComment(8));
         claimInfoScreen.goToAddComment();

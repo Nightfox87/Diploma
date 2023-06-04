@@ -10,6 +10,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import io.qameta.allure.android.runners.AllureAndroidJUnit4;
 import ru.iteco.fmhandroid.ui.AppActivity;
 import ru.iteco.fmhandroid.ui.data.AuthDataHelper;
 import ru.iteco.fmhandroid.ui.data.ClaimsDataHelper;
@@ -20,7 +21,7 @@ import ru.iteco.fmhandroid.ui.screen.CreatingClaimsScreen;
 import ru.iteco.fmhandroid.ui.screen.MainScreen;
 
 @LargeTest
-@RunWith(AndroidJUnit4.class)
+@RunWith(AllureAndroidJUnit4.class)
 public class ClaimsTest {
 
     @Rule
@@ -29,14 +30,14 @@ public class ClaimsTest {
 
     @Before
     public void setUp() throws InterruptedException {
-        Thread.sleep(7000);
+        Thread.sleep(8000);
         try {
             authorizationScreen.checkAuthScreenHeader();
         } catch (NoMatchingViewException e) {
             mainScreen.logout();
         }
         authorizationScreen.login(AuthDataHelper.getCorrectAuthInfo());
-        Thread.sleep(1000);
+        Thread.sleep(3000);
         mainScreen.appNameVisible();
         mainScreen.goToClaimsScreen();
         claimsScreen.checkClaimsScreen();
@@ -56,14 +57,15 @@ public class ClaimsTest {
         creatingClaimsScreen.saveClaim();
         claimsScreen.checkClaimsScreen();
         claimsScreen.filterInProgressClaims();
-        claimsScreen.findCreatedClaimInLastPosition();
+        claimsScreen.findCreatedClaimInLastPosition(ClaimsDataHelper.getInfoForClaimCreation(8));
         claimInfoScreen.checkClaimInfoScreen();
         claimInfoScreen.checkClaim(ClaimsDataHelper.getInfoForClaimCreation(8));
     }
 
     @Test
-    public void filterAndCheckCancelledClaims() {
+    public void filterAndCheckCancelledClaims() throws InterruptedException {
         claimsScreen.filterCancelledClaims();
+        Thread.sleep(1000);
         claimsScreen.checkFirstThreeCancelledClaimsAfterFilter();
     }
 

@@ -11,6 +11,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import io.qameta.allure.android.runners.AllureAndroidJUnit4;
 import ru.iteco.fmhandroid.ui.AppActivity;
 import ru.iteco.fmhandroid.ui.data.AuthDataHelper;
 import ru.iteco.fmhandroid.ui.data.NewsDataHelper;
@@ -22,7 +23,7 @@ import ru.iteco.fmhandroid.ui.screen.NewsControlPanelScreen;
 import ru.iteco.fmhandroid.ui.screen.NewsScreen;
 
 @LargeTest
-@RunWith(AndroidJUnit4.class)
+@RunWith(AllureAndroidJUnit4.class)
 public class NewsTest {
 
     @Rule
@@ -31,14 +32,14 @@ public class NewsTest {
 
     @Before
     public void setUp() throws InterruptedException {
-        Thread.sleep(5000);
+        Thread.sleep(8000);
         try {
             authorizationScreen.checkAuthScreenHeader();
         } catch (NoMatchingViewException e) {
             mainScreen.logout();
         }
         authorizationScreen.login(AuthDataHelper.getCorrectAuthInfo());
-        Thread.sleep(1000);
+        Thread.sleep(3000);
         mainScreen.appNameVisible();
     }
 
@@ -87,10 +88,10 @@ public class NewsTest {
         creatingNewsScreen.checkCreatingNewsScreen();
         creatingNewsScreen.fillInTheNewsFieldsForHolidayCategory(NewsDataHelper.getDataForNewsToDelete(0));
         creatingNewsScreen.saveNews();
-        Thread.sleep(1000);
+        Thread.sleep(3000);
         controlPanelScreen.findCreatedNews(NewsDataHelper.getDataForNewsToDelete(0));
         controlPanelScreen.deleteNews(NewsDataHelper.getDataForNewsToDelete(0));
-        Thread.sleep(2000);
+        Thread.sleep(3000);
         controlPanelScreen.checkNewsDoesNotExist(NewsDataHelper.getDataForNewsToDelete(0));
 
     }
@@ -105,7 +106,7 @@ public class NewsTest {
         creatingNewsScreen.checkCreatingNewsScreen();
         creatingNewsScreen.fillInTheNewsFieldsForHolidayCategory(NewsDataHelper.getDataForNewsEditing(0));
         creatingNewsScreen.saveNews();
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         controlPanelScreen.findCreatedNews(NewsDataHelper.getDataForNewsEditing(0));
         controlPanelScreen.goToEditNews(NewsDataHelper.getDataForNewsEditing(0));
         editScreen.checkEditNewsScreen();

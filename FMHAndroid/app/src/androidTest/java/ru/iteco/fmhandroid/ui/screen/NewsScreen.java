@@ -36,8 +36,8 @@ public class NewsScreen {
 
     public void checkNewsBeforeSort(NewsDataHelper.NewsInfo info) {
         String firstNews = info.getTextField();
-        String lastNewsDate = "01.01.001";
-        String lastNewsDescription = "My news #2042";
+        String lastNewsDate = "01.01.2012";
+        String lastNewsDescription = "Тестовое описание 01.01.2012В06:44";
         int itemCount = CustomViewMatcher.getCountFromRecyclerView(R.id.news_list_recycler_view);
         newsList.check(matches(CustomViewMatcher.atPosition(0, hasDescendant(withText(firstNews)))));
         newsList.perform(RecyclerViewActions.actionOnItemAtPosition(itemCount - 1, click()));
@@ -46,10 +46,11 @@ public class NewsScreen {
     }
 
     public void checkNewsAfterSort(NewsDataHelper.NewsInfo info) {
-        String firstNewsDate = "01.01.001";
-        String firstNewsDescription = "My news #2042";
+        String firstNewsDate = "01.01.2012";
+        String firstNewsDescription = "Тестовое описание 01.01.2012В06:44";
         String lastNews = info.getTextField();
         int itemCount = CustomViewMatcher.getCountFromRecyclerView(R.id.news_list_recycler_view);
+        newsList.perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
         newsList.check(matches(CustomViewMatcher.atPosition(0, hasDescendant(withText(firstNewsDate)))));
         newsList.check(matches(CustomViewMatcher.atPosition(0, hasDescendant(withText(firstNewsDescription)))));
         newsList.perform(RecyclerViewActions.actionOnItemAtPosition(itemCount - 1, click()));
