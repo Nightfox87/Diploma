@@ -8,12 +8,14 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 import androidx.test.espresso.ViewInteraction;
 
+import io.qameta.allure.kotlin.Step;
 import ru.iteco.fmhandroid.R;
 
 public class LoveIsAllScreen {
 
     public ViewInteraction screenTitle = onView(withId(R.id.our_mission_title_text_view));
 
+    @Step("Проверка экрана Цитаты")
     public void checkLoveIsAllScreen() {
         screenTitle.check(matches(isDisplayed()));
         screenTitle.check(matches(withText("Love is all")));

@@ -1,8 +1,7 @@
 package ru.iteco.fmhandroid.ui.tests;
 
-import androidx.test.espresso.NoMatchingViewException;
+import androidx.test.espresso.PerformException;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
-import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 
 import org.junit.Before;
@@ -11,6 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import io.qameta.allure.android.runners.AllureAndroidJUnit4;
+import io.qameta.allure.kotlin.Description;
 import ru.iteco.fmhandroid.ui.AppActivity;
 import ru.iteco.fmhandroid.ui.data.AuthDataHelper;
 import ru.iteco.fmhandroid.ui.screen.AboutScreen;
@@ -26,16 +26,14 @@ public class AboutScreenTest {
             new ActivityScenarioRule<>(AppActivity.class);
 
     @Before
-    public void setUp() throws InterruptedException {
-        Thread.sleep(8000);
+    public void setUp() {
         try {
-            authorizationScreen.checkAuthScreenHeader();
-        } catch (NoMatchingViewException e) {
+            authorizationScreen.waitForScreenHeader();
+        } catch (PerformException e) {
             mainScreen.logout();
         }
         authorizationScreen.login(AuthDataHelper.getCorrectAuthInfo());
-        Thread.sleep(3000);
-        mainScreen.appNameVisible();
+        mainScreen.waitForAppName();
     }
 
     MainScreen mainScreen = new MainScreen();
@@ -43,6 +41,7 @@ public class AboutScreenTest {
     AboutScreen aboutScreen = new AboutScreen();
 
     @Test
+    @Description("Переход к просмотру политики конфиденциальности")
     public void openPrivacyPolicy() {
         mainScreen.goToAboutScreenFromMainMenu();
         aboutScreen.checkAboutScreen();
@@ -50,6 +49,7 @@ public class AboutScreenTest {
     }
 
     @Test
+    @Description("Переход к просмотру пользовательского соглашения")
     public void openTermsOfUse() {
         mainScreen.goToAboutScreenFromMainMenu();
         aboutScreen.checkAboutScreen();

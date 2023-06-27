@@ -1,11 +1,19 @@
 package ru.iteco.fmhandroid.ui.data;
 
+
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+
 
 public class NewsDataHelper {
     public static String generateDate(int years) {
         return LocalDate.now().plusYears(years).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+    }
+
+    public static String getCurrentTime() {
+        return LocalDateTime.now().format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT));
     }
 
     public static class NewsInfo {
@@ -27,15 +35,19 @@ public class NewsDataHelper {
     }
 
     public static NewsInfo getFirstNewsData(int years) {
-        return new NewsInfo("Праздник 1 мая", generateDate(years));
+        return new NewsInfo("Праздник 1 мая " + getCurrentTime(), generateDate(years));
+    }
+
+    public static NewsInfo getNewsDataForSorting(int years) {
+        return new NewsInfo("NeWs FoR SoRtInG", generateDate(years));
     }
 
     public static NewsInfo getNewsDataForCancelCreation(int years) {
-        return new NewsInfo("1st May Holiday", generateDate(years));
+        return new NewsInfo("1st May Holiday ", generateDate(years));
     }
 
     public static NewsInfo getDataForNewsEditing(int years) {
-        return new NewsInfo("News of today", generateDate(years));
+        return new NewsInfo("News of today " + getCurrentTime(), generateDate(years));
     }
 
     public static NewsInfo getDataForNewsToDelete(int years) {

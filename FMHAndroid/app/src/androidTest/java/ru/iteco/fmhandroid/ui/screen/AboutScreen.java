@@ -14,6 +14,7 @@ import android.content.Intent;
 import androidx.test.espresso.ViewInteraction;
 import androidx.test.espresso.intent.Intents;
 
+import io.qameta.allure.kotlin.Step;
 import ru.iteco.fmhandroid.R;
 
 public class AboutScreen {
@@ -23,15 +24,17 @@ public class AboutScreen {
     public ViewInteraction privacyPolicyLink = onView(withId(R.id.about_privacy_policy_value_text_view));
     public ViewInteraction termsOfUseLink = onView(withId(R.id.about_terms_of_use_value_text_view));
 
-
+    @Step("Проверка экрана О приложении")
     public void checkAboutScreen() {
         version.check(matches(isDisplayed()));
     }
 
+    @Step("Переход назад по кнопке")
     public void goBack() {
         backButton.perform(click());
     }
 
+    @Step("Открытие Политики конфиденциальности")
     public void goToPrivacyPolicy() {
         Intents.init();
         privacyPolicyLink.perform(click());
@@ -41,6 +44,7 @@ public class AboutScreen {
 
     }
 
+    @Step("Открытие Пользовательского соглашения")
     public void goToTermsOfUse() {
         Intents.init();
         termsOfUseLink.perform(click());

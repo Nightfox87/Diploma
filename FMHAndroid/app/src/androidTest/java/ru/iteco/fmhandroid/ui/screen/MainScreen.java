@@ -4,13 +4,16 @@ import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 
 import androidx.test.espresso.ViewInteraction;
 
+import io.qameta.allure.kotlin.Step;
 import ru.iteco.fmhandroid.R;
+import ru.iteco.fmhandroid.ui.utils.CustomViewAction;
 
 public class MainScreen {
 
@@ -27,47 +30,57 @@ public class MainScreen {
     public ViewInteraction allClaimsButton = onView(withId(R.id.all_claims_text_view));
     public ViewInteraction loveIsAllButton = onView(withId(R.id.our_mission_image_button));
 
+    @Step("Логаут")
     public void logout() {
         profileButton.perform(click());
         logoutButton.perform(click());
     }
 
-    public void appNameVisible() {
-        appName.check(matches(isDisplayed()));
+    @Step("Ожидание появления названия приложения")
+    public void waitForAppName() {
+        onView(isRoot()).perform(CustomViewAction.waitDisplayed(R.id.trademark_image_view, 10000));
     }
 
+    @Step("Переход на экран Новости из основного меню вверху экрана")
     public void goToNewsScreenFromMainMenu() {
         mainMenuButton.perform(click());
         mainMenuNewsButton.perform(click());
     }
 
+    @Step("Переход на экран Заявки из основного меню вверху экрана")
     public void goToClaimsScreenFromMainMenu() {
         mainMenuButton.perform(click());
         mainMenuClaimsButton.perform(click());
     }
 
+    @Step("Переход на экран О приложении из основного меню вверху экрана")
     public void goToAboutScreenFromMainMenu() {
         mainMenuButton.perform(click());
         mainMenuAboutButton.perform(click());
     }
 
+    @Step("Переход на Главный экран из основного меню вверху экрана")
     public void goToMainScreenFromMainMenu() {
         mainMenuButton.perform(click());
         mainMenuMainButton.perform(click());
     }
 
+    @Step("Переход на экран создания заявки с главного экрана")
     public void goToCreatingClaims() {
         addClaimButton.perform(click());
     }
 
+    @Step("Переход на экран Новости с главного экрана")
     public void goToNewsScreen() {
         allNewsButton.perform(click());
     }
 
+    @Step("Переход на экран Заявки с главного экрана")
     public void goToClaimsScreen() {
         allClaimsButton.perform(click());
     }
 
+    @Step("Переход на экран Цитаты")
     public void goToLoveIsAllScreen() {
         loveIsAllButton.perform(click());
     }

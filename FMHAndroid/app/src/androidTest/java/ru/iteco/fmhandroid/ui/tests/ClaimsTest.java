@@ -1,8 +1,7 @@
 package ru.iteco.fmhandroid.ui.tests;
 
-import androidx.test.espresso.NoMatchingViewException;
+import androidx.test.espresso.PerformException;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
-import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 
 import org.junit.Before;
@@ -11,6 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import io.qameta.allure.android.runners.AllureAndroidJUnit4;
+import io.qameta.allure.kotlin.Description;
 import ru.iteco.fmhandroid.ui.AppActivity;
 import ru.iteco.fmhandroid.ui.data.AuthDataHelper;
 import ru.iteco.fmhandroid.ui.data.ClaimsDataHelper;
@@ -29,16 +29,14 @@ public class ClaimsTest {
             new ActivityScenarioRule<>(AppActivity.class);
 
     @Before
-    public void setUp() throws InterruptedException {
-        Thread.sleep(8000);
+    public void setUp() {
         try {
-            authorizationScreen.checkAuthScreenHeader();
-        } catch (NoMatchingViewException e) {
+            authorizationScreen.waitForScreenHeader();
+        } catch (PerformException e) {
             mainScreen.logout();
         }
         authorizationScreen.login(AuthDataHelper.getCorrectAuthInfo());
-        Thread.sleep(3000);
-        mainScreen.appNameVisible();
+        mainScreen.waitForAppName();
         mainScreen.goToClaimsScreen();
         claimsScreen.checkClaimsScreen();
     }
@@ -50,26 +48,33 @@ public class ClaimsTest {
     ClaimInfoScreen claimInfoScreen = new ClaimInfoScreen();
 
     @Test
+    @Description("Создание заявки")
     public void creatingClaimTest() {
         claimsScreen.goToCreatingClaim();
         creatingClaimsScreen.checkCreatingClaimsScreen();
-        creatingClaimsScreen.fillInCreatingClaimFields(ClaimsDataHelper.getInfoForClaimCreation(8));
+        creatingClaimsScreen.fillInCreatingClaimFields(ClaimsDataHelper.getInfoForClaimCreation(0));
         creatingClaimsScreen.saveClaim();
+        claimsScreen.waitToLoadScreen();
         claimsScreen.checkClaimsScreen();
+        claimsScreen.waitToLoadList();
         claimsScreen.filterInProgressClaims();
-        claimsScreen.findCreatedClaimInLastPosition(ClaimsDataHelper.getInfoForClaimCreation(8));
+        claimsScreen.findCreatedClaim(ClaimsDataHelper.getInfoForClaimCreation(0));
         claimInfoScreen.checkClaimInfoScreen();
-        claimInfoScreen.checkClaim(ClaimsDataHelper.getInfoForClaimCreation(8));
+        claimInfoScreen.checkClaim(ClaimsDataHelper.getInfoForClaimCreation(0));
     }
 
     @Test
-    public void filterAndCheckCancelledClaims() throws InterruptedException {
+    @Description("Фильтрация и проверка отмененных заявок")
+    public void filterAndCheckCancelledClaims() {
         claimsScreen.filterCancelledClaims();
-        Thread.sleep(1000);
+        claimsScreen.waitToLoadScreen();
+        claimsScreen.checkClaimsScreen();
+        claimsScreen.waitToLoadList();
         claimsScreen.checkFirstThreeCancelledClaimsAfterFilter();
     }
 
     @Test
+    @Description("Создание заявки с датой из прошлого")
     public void createClaimWithPastDate() {
         claimsScreen.goToCreatingClaim();
         creatingClaimsScreen.checkCreatingClaimsScreen();
@@ -79,6 +84,7 @@ public class ClaimsTest {
     }
 
     @Test
+    @Description("Создание заявки с несуществующим исполнителем")
     public void createClaimWithNonExistingExecutor() {
         claimsScreen.goToCreatingClaim();
         creatingClaimsScreen.checkCreatingClaimsScreen();
@@ -89,12 +95,12 @@ public class ClaimsTest {
     }
 
     @Test
+    @Description("Отмена создания заявки")
     public void cancelCreationOfClaim() {
         claimsScreen.goToCreatingClaim();
         creatingClaimsScreen.checkCreatingClaimsScreen();
         creatingClaimsScreen.cancelCreatingClaim();
         claimsScreen.checkClaimsScreen();
     }
-
 
 }

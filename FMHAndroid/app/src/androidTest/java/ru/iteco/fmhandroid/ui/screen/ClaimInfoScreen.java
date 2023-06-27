@@ -6,6 +6,7 @@ import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.RootMatchers.withDecorView;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.not;
@@ -19,9 +20,11 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import org.junit.Before;
 import org.junit.Rule;
 
+import io.qameta.allure.kotlin.Step;
 import ru.iteco.fmhandroid.R;
 import ru.iteco.fmhandroid.ui.AppActivity;
 import ru.iteco.fmhandroid.ui.data.ClaimsDataHelper;
+import ru.iteco.fmhandroid.ui.utils.CustomViewAction;
 
 public class ClaimInfoScreen {
     @Rule
@@ -56,10 +59,17 @@ public class ClaimInfoScreen {
         });
     }
 
+    @Step("Ожидание загрузки экрана")
+    public void waitToLoadScreen() {
+        onView(isRoot()).perform(CustomViewAction.waitDisplayed(R.id.status_label_text_view, 1000));
+    }
+
+    @Step("Проверка экрана информации о заявке")
     public void checkClaimInfoScreen() {
         titleLabel.check(matches(isDisplayed()));
     }
 
+    @Step("Проверка заявки")
     public void checkClaim(ClaimsDataHelper.ClaimsInfo info) {
         title.check(matches(isDisplayed()));
         title.check(matches(withText(info.getTextField())));
@@ -69,6 +79,7 @@ public class ClaimInfoScreen {
         planDate.check(matches(withText(info.getDate())));
     }
 
+    @Step("Выполнение заявки и проверка статуса")
     public void toExecuteClaimAndCheckStatus(ClaimsDataHelper.CommentsInfo info) {
         changeStatusButton.perform(click());
         toExecuteButton.perform(click());
@@ -77,6 +88,7 @@ public class ClaimInfoScreen {
         status.check(matches(withText("Executed")));
     }
 
+    @Step("Сброс заявки и проверка статуса")
     public void throwOffClaimAndCheckStatus(ClaimsDataHelper.CommentsInfo info) {
         changeStatusButton.perform(click());
         throwOffButton.perform(click());
@@ -85,24 +97,29 @@ public class ClaimInfoScreen {
         status.check(matches(withText("Open")));
     }
 
+    @Step("Переход на экран редактирования заявки")
     public void goToEditingClaimScreen() {
         editClaimButton.perform(click());
     }
 
+    @Step("Проверка описания после редактирования")
     public void checkDescriptionAfterEdit(ClaimsDataHelper.ClaimsInfo info) {
         description.check(matches(withText(info.getDate())));
     }
 
+    @Step("Отмена заявки и проверка статуса")
     public void cancelClaimAndCheckStatus() {
         changeStatusButton.perform(click());
         cancelButton.perform(click());
         status.check(matches(withText("Canceled")));
     }
 
+    @Step("Переход к экрану добавления комментария")
     public void goToAddComment() {
         addComment.perform(click());
     }
 
+    @Step("Проверка комментария")
     public void checkComment(ClaimsDataHelper.CommentsInfo info) {
         commentText.check(matches(withText(info.getCommentText())));
     }

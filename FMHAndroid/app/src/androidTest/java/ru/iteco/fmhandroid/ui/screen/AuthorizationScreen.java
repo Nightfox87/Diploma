@@ -6,6 +6,7 @@ import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.RootMatchers.withDecorView;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.not;
@@ -19,9 +20,11 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import org.junit.Before;
 import org.junit.Rule;
 
+import io.qameta.allure.kotlin.Step;
 import ru.iteco.fmhandroid.R;
 import ru.iteco.fmhandroid.ui.AppActivity;
 import ru.iteco.fmhandroid.ui.data.AuthDataHelper;
+import ru.iteco.fmhandroid.ui.utils.CustomViewAction;
 
 public class AuthorizationScreen {
 
@@ -45,22 +48,31 @@ public class AuthorizationScreen {
         });
     }
 
+    @Step("Ожидание видимости названия экрана Авторизации")
+    public void waitForScreenHeader() {
+        onView(isRoot()).perform(CustomViewAction.waitDisplayed(R.id.header, 15000));
+    }
+
+    @Step("Авторизация с валидными данными")
     public void login(AuthDataHelper.AuthInfo info) {
         loginField.perform(replaceText(info.getLogin()));
         passwordField.perform(replaceText(info.getPassword()));
         signInButton.perform(click());
     }
 
+    @Step("Проверка экрана Авторизации")
     public void checkAuthScreenHeader() {
         authHeader.check(matches(isDisplayed()));
         authHeader.check(matches(withText("Authorization")));
     }
 
+    @Step("Сообщение об ошибочном логине или пароле")
     public void wrongLoginOrPasswordToastVisible() {
         onView(withText("Wrong login or password")).inRoot(withDecorView(not(decorView)))
                 .check(matches(isDisplayed()));
     }
 
+    @Step("Сообщение о пустом логине или пароле")
     public void emptyLoginOrPasswordToastVisible() {
         onView(withText("Login and password cannot be empty")).inRoot(withDecorView(not(decorView)))
                 .check(matches(isDisplayed()));

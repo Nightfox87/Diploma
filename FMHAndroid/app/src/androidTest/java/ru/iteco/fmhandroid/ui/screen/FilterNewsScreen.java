@@ -19,6 +19,7 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import org.junit.Before;
 import org.junit.Rule;
 
+import io.qameta.allure.kotlin.Step;
 import ru.iteco.fmhandroid.R;
 import ru.iteco.fmhandroid.ui.AppActivity;
 import ru.iteco.fmhandroid.ui.data.NewsDataHelper;
@@ -47,11 +48,13 @@ public class FilterNewsScreen {
         });
     }
 
+    @Step("Проверка экрана фильтрации новостей")
     public void checkFilterNewsScreen() {
         filterNewsTitle.check(matches(isDisplayed()));
         filterNewsTitle.check(matches(withText("Filter news")));
     }
 
+    @Step("Заполнение полей для фильтрации новостей")
     public void fillInFilteringFields(NewsDataHelper.FilterInfo info) {
         category.perform(click());
         category.perform(replaceText(info.getCategory()));
@@ -61,10 +64,9 @@ public class FilterNewsScreen {
         filterButton.perform(click());
     }
 
+    @Step("Сообщение о неверной категории")
     public void wrongCategoryMessageDisplayed() {
         onView(withText("Wrong category")).inRoot(withDecorView(not(decorView)))
                 .check(matches(isDisplayed()));
     }
-
-
 }

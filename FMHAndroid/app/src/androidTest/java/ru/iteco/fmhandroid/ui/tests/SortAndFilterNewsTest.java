@@ -1,8 +1,7 @@
 package ru.iteco.fmhandroid.ui.tests;
 
-import androidx.test.espresso.NoMatchingViewException;
+import androidx.test.espresso.PerformException;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
-import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 
 import org.junit.Before;
@@ -11,6 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import io.qameta.allure.android.runners.AllureAndroidJUnit4;
+import io.qameta.allure.kotlin.Description;
 import ru.iteco.fmhandroid.ui.AppActivity;
 import ru.iteco.fmhandroid.ui.data.AuthDataHelper;
 import ru.iteco.fmhandroid.ui.data.NewsDataHelper;
@@ -30,16 +30,14 @@ public class SortAndFilterNewsTest {
             new ActivityScenarioRule<>(AppActivity.class);
 
     @Before
-    public void setUp() throws InterruptedException {
-        Thread.sleep(8000);
+    public void setUp() {
         try {
-            authorizationScreen.checkAuthScreenHeader();
-        } catch (NoMatchingViewException e) {
+            authorizationScreen.waitForScreenHeader();
+        } catch (PerformException e) {
             mainScreen.logout();
         }
         authorizationScreen.login(AuthDataHelper.getCorrectAuthInfo());
-        Thread.sleep(3000);
-        mainScreen.appNameVisible();
+        mainScreen.waitForAppName();
     }
 
 
@@ -51,6 +49,7 @@ public class SortAndFilterNewsTest {
     CreatingNewsScreen creatingNews = new CreatingNewsScreen();
 
     @Test
+    @Description("Сортировка новостей")
     public void sortNews() {
         mainScreen.goToNewsScreenFromMainMenu();
         newsScreen.checkNewsScreen();
@@ -58,15 +57,16 @@ public class SortAndFilterNewsTest {
         controlPanelScreen.checkControlPanelScreen();
         controlPanelScreen.goToCreatingNewsScreen();
         creatingNews.checkCreatingNewsScreen();
-        creatingNews.fillInTheNewsFieldsForHolidayCategory(NewsDataHelper.getFirstNewsData(0));
+        creatingNews.fillInTheNewsFieldsForHolidayCategory(NewsDataHelper.getNewsDataForSorting(0));
         creatingNews.saveNews();
         mainScreen.goToNewsScreenFromMainMenu();
-        newsScreen.checkNewsBeforeSort(NewsDataHelper.getFirstNewsData(0));
+        newsScreen.checkNewsBeforeSort(NewsDataHelper.getNewsDataForSorting(0));
         newsScreen.sortNews();
-        newsScreen.checkNewsAfterSort(NewsDataHelper.getFirstNewsData(0));
+        newsScreen.checkNewsAfterSort(NewsDataHelper.getNewsDataForSorting(0));
     }
 
     @Test
+    @Description("Фильтрация новостей по датам и неактивному статусу")
     public void filterNewsWithDatesAndInactiveStatus() {
         mainScreen.goToNewsScreenFromMainMenu();
         newsScreen.checkNewsScreen();
@@ -80,6 +80,7 @@ public class SortAndFilterNewsTest {
     }
 
     @Test
+    @Description("Фильтрация с несуществующей категорией")
     public void filterWithNonExistingCategory() {
         mainScreen.goToNewsScreenFromMainMenu();
         newsScreen.checkNewsScreen();

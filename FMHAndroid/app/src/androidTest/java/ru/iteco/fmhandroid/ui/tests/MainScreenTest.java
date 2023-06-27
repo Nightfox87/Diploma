@@ -1,8 +1,7 @@
 package ru.iteco.fmhandroid.ui.tests;
 
-import androidx.test.espresso.NoMatchingViewException;
+import androidx.test.espresso.PerformException;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
-import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 
 import org.junit.Before;
@@ -11,6 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import io.qameta.allure.android.runners.AllureAndroidJUnit4;
+import io.qameta.allure.kotlin.Description;
 import ru.iteco.fmhandroid.ui.AppActivity;
 import ru.iteco.fmhandroid.ui.data.AuthDataHelper;
 import ru.iteco.fmhandroid.ui.screen.AuthorizationScreen;
@@ -28,16 +28,14 @@ public class MainScreenTest {
             new ActivityScenarioRule<>(AppActivity.class);
 
     @Before
-    public void setUp() throws InterruptedException {
-        Thread.sleep(8000);
+    public void setUp() {
         try {
-            authorizationScreen.checkAuthScreenHeader();
-        } catch (NoMatchingViewException e) {
+            authorizationScreen.waitForScreenHeader();
+        } catch (PerformException e) {
             mainScreen.logout();
         }
         authorizationScreen.login(AuthDataHelper.getCorrectAuthInfo());
-        Thread.sleep(3000);
-        mainScreen.appNameVisible();
+        mainScreen.waitForAppName();
     }
 
     MainScreen mainScreen = new MainScreen();
@@ -47,19 +45,22 @@ public class MainScreenTest {
     CreatingClaimsScreen creatingClaimsScreen = new CreatingClaimsScreen();
 
     @Test
+    @Description("Переход к созданию новой заявки с главного экрана")
     public void addNewClaimFromMainScreen() {
         mainScreen.goToCreatingClaims();
         creatingClaimsScreen.checkCreatingClaimsScreen();
     }
 
     @Test
+    @Description("Переход на экран Новости с главного экрана")
     public void goToNewsScreenFromMainScreen() {
         mainScreen.goToNewsScreen();
         newsScreen.checkNewsScreen();
     }
 
     @Test
-    public void goToClaimsScreenFromMainScreen() throws InterruptedException {
+    @Description("Переход на экран Заявки с главного экрана")
+    public void goToClaimsScreenFromMainScreen() {
         mainScreen.goToClaimsScreen();
         claimsScreen.checkClaimsScreen();
     }

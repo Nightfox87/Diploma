@@ -10,6 +10,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 import androidx.test.espresso.ViewInteraction;
 
+import io.qameta.allure.kotlin.Step;
 import ru.iteco.fmhandroid.R;
 import ru.iteco.fmhandroid.ui.data.NewsDataHelper;
 
@@ -20,6 +21,7 @@ public class EditingNewsScreen {
     public ViewInteraction title = onView(withId(R.id.news_item_title_text_input_edit_text));
     public ViewInteraction saveButton = onView(withId(R.id.save_button));
 
+    @Step("Проверка экрана редактирования новости")
     public void checkEditNewsScreen() {
         editNewsScreenTitle.check(matches(isDisplayed()));
         editNewsScreenTitle.check(matches(withText("Editing")));
@@ -27,6 +29,7 @@ public class EditingNewsScreen {
         editNewsScreenSubTitle.check(matches(withText("News")));
     }
 
+    @Step("Редактирование названия новости")
     public void editTitle(NewsDataHelper.NewsInfo info) {
         title.perform(replaceText(info.getTextField()));
         saveButton.perform(click());

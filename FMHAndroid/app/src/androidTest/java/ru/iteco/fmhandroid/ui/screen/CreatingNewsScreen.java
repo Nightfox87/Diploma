@@ -19,6 +19,7 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import org.junit.Before;
 import org.junit.Rule;
 
+import io.qameta.allure.kotlin.Step;
 import ru.iteco.fmhandroid.R;
 import ru.iteco.fmhandroid.ui.AppActivity;
 import ru.iteco.fmhandroid.ui.data.NewsDataHelper;
@@ -52,6 +53,7 @@ public class CreatingNewsScreen {
         });
     }
 
+    @Step("Проверка экрана создания новости")
     public void checkCreatingNewsScreen() {
         creatingNewsTitle.check(matches(isDisplayed()));
         creatingNewsTitle.check(matches(withText("Creating")));
@@ -59,6 +61,7 @@ public class CreatingNewsScreen {
         creatingNewsSubTitle.check(matches(withText("News")));
     }
 
+    @Step("Заполнение полей при создании новости")
     public void fillInTheNewsFieldsForHolidayCategory(NewsDataHelper.NewsInfo newsInfo) {
         categoryField.perform(click());
         holidayCategory.check(matches(isDisplayed())).perform(click());
@@ -69,18 +72,20 @@ public class CreatingNewsScreen {
         descriptionField.perform(replaceText(newsInfo.getTextField()));
     }
 
+    @Step("Сохранение новости")
     public void saveNews() {
         saveButton.perform(click());
     }
 
+    @Step("Отмена создания новости")
     public void cancelNews() {
         cancelButton.perform(click());
         okButton.perform(click());
     }
 
+    @Step("Сообщение о неверной дате")
     public void wrongDateMessage() {
         onView(withText("Wrong date")).inRoot(withDecorView(not(decorView)))
                 .check(matches(isDisplayed()));
     }
-
 }

@@ -29,23 +29,23 @@ public class ClaimsDataHelper {
 
 
     public static ClaimsInfo getInfoForClaimCreation(int years) {
-        return new ClaimsInfo("Новая заявка №3553", generateDate(years));
+        return new ClaimsInfo("Новая заявка №775", generateDate(years));
     }
 
     public static ClaimsInfo getInfoForClaimEditing(int years) {
-        return new ClaimsInfo("Claim!@#$%^&*(){}:", generateDate(years));
+        return new ClaimsInfo("Claim!@#$%^&*(){}:+=?", generateDate(years));
     }
 
     public static ClaimsInfo getInfoForExecutedStatus(int years) {
-        return new ClaimsInfo("NeW ClAiM No.1122", generateDate(years));
+        return new ClaimsInfo("NeW ClAiM No.12345", generateDate(years));
     }
 
     public static ClaimsInfo getInfoForCancelledStatus(int years) {
-        return new ClaimsInfo("Cancelled claim", generateDate(years));
+        return new ClaimsInfo("New cancelled claim 2", generateDate(years));
     }
 
     public static ClaimsInfo getInfoForClaimWithComment(int years) {
-        return new ClaimsInfo("New claim with comment", generateDate(years));
+        return new ClaimsInfo("Create claim with comment 20", generateDate(years));
     }
 
     public static class CommentsInfo {

@@ -10,6 +10,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 import androidx.test.espresso.ViewInteraction;
 
+import io.qameta.allure.kotlin.Step;
 import ru.iteco.fmhandroid.R;
 import ru.iteco.fmhandroid.ui.data.ClaimsDataHelper;
 
@@ -20,6 +21,7 @@ public class EditingClaimsScreen {
     public ViewInteraction descriptionField = onView(withId(R.id.description_edit_text));
     public ViewInteraction saveButton = onView(withId(R.id.save_button));
 
+    @Step("Проверка экрана редактирования заявки")
     public void checkEditingClaimScreen() {
         screenTitle.check(matches(isDisplayed()));
         screenTitle.check(matches(withText("Editing")));
@@ -27,6 +29,7 @@ public class EditingClaimsScreen {
         screenSubTitle.check(matches(withText("Claims")));
     }
 
+    @Step("Редактирование описания заявки")
     public void changeClaimDescription(ClaimsDataHelper.ClaimsInfo info) {
         descriptionField.perform(replaceText(info.getDate()));
         saveButton.perform(click());

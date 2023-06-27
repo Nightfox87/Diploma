@@ -1,9 +1,8 @@
 package ru.iteco.fmhandroid.ui.tests;
 
 
-import androidx.test.espresso.NoMatchingViewException;
+import androidx.test.espresso.PerformException;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
-import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 
 import org.junit.Before;
@@ -12,6 +11,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import io.qameta.allure.android.runners.AllureAndroidJUnit4;
+import io.qameta.allure.kotlin.Description;
 import ru.iteco.fmhandroid.ui.AppActivity;
 import ru.iteco.fmhandroid.ui.data.AuthDataHelper;
 import ru.iteco.fmhandroid.ui.screen.AboutScreen;
@@ -30,16 +30,14 @@ public class NavigationTest {
             new ActivityScenarioRule<>(AppActivity.class);
 
     @Before
-    public void setUp() throws InterruptedException {
-        Thread.sleep(8000);
+    public void setUp() {
         try {
-            authorizationScreen.checkAuthScreenHeader();
-        } catch (NoMatchingViewException e) {
+            authorizationScreen.waitForScreenHeader();
+        } catch (PerformException e) {
             mainScreen.logout();
         }
         authorizationScreen.login(AuthDataHelper.getCorrectAuthInfo());
-        Thread.sleep(3000);
-        mainScreen.appNameVisible();
+        mainScreen.waitForAppName();
     }
 
     MainScreen mainScreen = new MainScreen();
@@ -50,24 +48,21 @@ public class NavigationTest {
     LoveIsAllScreen loveIsAllScreen = new LoveIsAllScreen();
 
     @Test
-    public void navigationTest() throws InterruptedException {
+    @Description("Переход между экранами приложения через выпадающее меню вверху экрана")
+    public void navigationTest() {
         mainScreen.goToNewsScreenFromMainMenu();
-        //Thread.sleep(300);
         newsScreen.checkNewsScreen();
         mainScreen.goToClaimsScreenFromMainMenu();
-        //Thread.sleep(300);
         claimsScreen.checkClaimsScreen();
         mainScreen.goToAboutScreenFromMainMenu();
-        //Thread.sleep(300);
         aboutScreen.checkAboutScreen();
         aboutScreen.goBack();
-        //Thread.sleep(300);
         mainScreen.goToMainScreenFromMainMenu();
-        //Thread.sleep(300);
-        mainScreen.appNameVisible();
+        mainScreen.waitForAppName();
     }
 
     @Test
+    @Description("Переход на экран Цитаты")
     public void goToLoveIsAllScreen() {
         mainScreen.goToLoveIsAllScreen();
         loveIsAllScreen.checkLoveIsAllScreen();

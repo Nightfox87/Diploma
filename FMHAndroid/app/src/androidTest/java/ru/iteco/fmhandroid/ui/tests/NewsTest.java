@@ -1,9 +1,8 @@
 package ru.iteco.fmhandroid.ui.tests;
 
 
-import androidx.test.espresso.NoMatchingViewException;
+import androidx.test.espresso.PerformException;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
-import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 
 import org.junit.Before;
@@ -12,6 +11,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import io.qameta.allure.android.runners.AllureAndroidJUnit4;
+import io.qameta.allure.kotlin.Description;
 import ru.iteco.fmhandroid.ui.AppActivity;
 import ru.iteco.fmhandroid.ui.data.AuthDataHelper;
 import ru.iteco.fmhandroid.ui.data.NewsDataHelper;
@@ -31,16 +31,14 @@ public class NewsTest {
             new ActivityScenarioRule<>(AppActivity.class);
 
     @Before
-    public void setUp() throws InterruptedException {
-        Thread.sleep(8000);
+    public void setUp() {
         try {
-            authorizationScreen.checkAuthScreenHeader();
-        } catch (NoMatchingViewException e) {
+            authorizationScreen.waitForScreenHeader();
+        } catch (PerformException e) {
             mainScreen.logout();
         }
         authorizationScreen.login(AuthDataHelper.getCorrectAuthInfo());
-        Thread.sleep(3000);
-        mainScreen.appNameVisible();
+        mainScreen.waitForAppName();
     }
 
     MainScreen mainScreen = new MainScreen();
@@ -51,7 +49,8 @@ public class NewsTest {
     EditingNewsScreen editScreen = new EditingNewsScreen();
 
     @Test
-    public void creatingNewsTest() throws InterruptedException {
+    @Description("Создание новости")
+    public void creatingNewsTest() {
         mainScreen.goToNewsScreenFromMainMenu();
         newsScreen.checkNewsScreen();
         newsScreen.goToNewsControlPanel();
@@ -60,12 +59,13 @@ public class NewsTest {
         creatingNewsScreen.checkCreatingNewsScreen();
         creatingNewsScreen.fillInTheNewsFieldsForHolidayCategory(NewsDataHelper.getFirstNewsData(0));
         creatingNewsScreen.saveNews();
-        Thread.sleep(1000);
+        controlPanelScreen.waitNewsToLoad();
         controlPanelScreen.findCreatedNews(NewsDataHelper.getFirstNewsData(0));
 
     }
 
     @Test
+    @Description("Отмена создания новости")
     public void cancelCreationOfNews() {
         mainScreen.goToNewsScreenFromMainMenu();
         newsScreen.checkNewsScreen();
@@ -79,7 +79,8 @@ public class NewsTest {
     }
 
     @Test
-    public void deleteNews() throws InterruptedException {
+    @Description("Удаление новости")
+    public void deleteNews() {
         mainScreen.goToNewsScreenFromMainMenu();
         newsScreen.checkNewsScreen();
         newsScreen.goToNewsControlPanel();
@@ -88,16 +89,17 @@ public class NewsTest {
         creatingNewsScreen.checkCreatingNewsScreen();
         creatingNewsScreen.fillInTheNewsFieldsForHolidayCategory(NewsDataHelper.getDataForNewsToDelete(0));
         creatingNewsScreen.saveNews();
-        Thread.sleep(3000);
+        controlPanelScreen.waitNewsToLoad();
         controlPanelScreen.findCreatedNews(NewsDataHelper.getDataForNewsToDelete(0));
         controlPanelScreen.deleteNews(NewsDataHelper.getDataForNewsToDelete(0));
-        Thread.sleep(3000);
+        controlPanelScreen.waitNewsToLoad();
         controlPanelScreen.checkNewsDoesNotExist(NewsDataHelper.getDataForNewsToDelete(0));
 
     }
 
     @Test
-    public void editTitleInNewsAndSave() throws InterruptedException {
+    @Description("Редактирование заголовка новости с сохранением")
+    public void editTitleInNewsAndSave() {
         mainScreen.goToNewsScreenFromMainMenu();
         newsScreen.checkNewsScreen();
         newsScreen.goToNewsControlPanel();
@@ -106,7 +108,9 @@ public class NewsTest {
         creatingNewsScreen.checkCreatingNewsScreen();
         creatingNewsScreen.fillInTheNewsFieldsForHolidayCategory(NewsDataHelper.getDataForNewsEditing(0));
         creatingNewsScreen.saveNews();
-        Thread.sleep(2000);
+        controlPanelScreen.waitScreenToLoad();
+        controlPanelScreen.checkControlPanelScreen();
+        controlPanelScreen.waitNewsToLoad();
         controlPanelScreen.findCreatedNews(NewsDataHelper.getDataForNewsEditing(0));
         controlPanelScreen.goToEditNews(NewsDataHelper.getDataForNewsEditing(0));
         editScreen.checkEditNewsScreen();
@@ -117,6 +121,7 @@ public class NewsTest {
     }
 
     @Test
+    @Description("Создание новости с датой из прошлого")
     public void createNewsWithPastDate() {
         mainScreen.goToNewsScreenFromMainMenu();
         newsScreen.checkNewsScreen();

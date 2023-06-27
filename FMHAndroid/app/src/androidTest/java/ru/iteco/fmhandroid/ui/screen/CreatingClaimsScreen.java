@@ -19,6 +19,7 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import org.junit.Before;
 import org.junit.Rule;
 
+import io.qameta.allure.kotlin.Step;
 import ru.iteco.fmhandroid.R;
 import ru.iteco.fmhandroid.ui.AppActivity;
 import ru.iteco.fmhandroid.ui.data.ClaimsDataHelper;
@@ -51,6 +52,7 @@ public class CreatingClaimsScreen {
         });
     }
 
+    @Step("Проверка экрана создания заявки")
     public void checkCreatingClaimsScreen() {
         creatingClaimsTitle.check(matches(isDisplayed()));
         creatingClaimsTitle.check(matches(withText("Creating")));
@@ -58,6 +60,7 @@ public class CreatingClaimsScreen {
         creatingClaimsSubTitle.check(matches(withText("Claims")));
     }
 
+    @Step("Заполнение полей при создании заявки")
     public void fillInCreatingClaimFields(ClaimsDataHelper.ClaimsInfo info) {
         title.perform(replaceText(info.getTextField()));
         executor.perform(click());
@@ -68,28 +71,31 @@ public class CreatingClaimsScreen {
         description.perform(replaceText(info.getTextField()));
     }
 
+    @Step("Сохранение заявки")
     public void saveClaim() {
         saveButton.perform(click());
     }
 
+    @Step("Отмена создания заявки")
     public void cancelCreatingClaim() {
         cancelButton.perform(click());
         okButton.perform(click());
     }
 
+    @Step("Заполнение поля Исполнитель")
     public void setExecutorName(ClaimsDataHelper.ClaimsInfo info) {
         executorName.perform(replaceText(info.getTextField()));
     }
 
+    @Step("Сообщение о неверной дате")
     public void wrongDateMessage() {
         onView(withText("Wrong date")).inRoot(withDecorView(not(decorView)))
                 .check(matches(isDisplayed()));
     }
 
+    @Step("Сообщение о неверном исполнителе")
     public void wrongExecutorMessage() {
         onView(withText("Wrong executor")).inRoot(withDecorView(not(decorView)))
                 .check(matches(isDisplayed()));
     }
-
-
 }
