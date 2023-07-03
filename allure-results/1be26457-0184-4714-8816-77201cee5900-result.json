@@ -1,0 +1,53 @@
+{
+    "name": "goToClaimsScreenFromMainScreen",
+    "start": 1688380436272,
+    "stop": 1688380447176,
+    "stage": "finished",
+    "description": "Переход на экран Заявки с главного экрана",
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [
+    ],
+    "attachments": [
+    ],
+    "parameters": [
+    ],
+    "uuid": "1be26457-0184-4714-8816-77201cee5900",
+    "historyId": "406e1cc25ca9ab0b2a1e600ee1996e61",
+    "fullName": "ru.iteco.fmhandroid.ui.tests.MainScreenTest.goToClaimsScreenFromMainScreen",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.iteco.fmhandroid.ui.tests"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.iteco.fmhandroid.ui.tests.MainScreenTest"
+        },
+        {
+            "name": "testMethod",
+            "value": "goToClaimsScreenFromMainScreen"
+        },
+        {
+            "name": "suite",
+            "value": "ru.iteco.fmhandroid.ui.tests.MainScreenTest"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: androidx.test.runner.AndroidJUnitRunner(951)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        }
+    ]
+}

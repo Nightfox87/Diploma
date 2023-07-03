@@ -1,0 +1,53 @@
+{
+    "name": "addNewClaimFromMainScreen",
+    "start": 1688380399686,
+    "stop": 1688380410601,
+    "stage": "finished",
+    "description": "Переход к созданию новой заявки с главного экрана",
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [
+    ],
+    "attachments": [
+    ],
+    "parameters": [
+    ],
+    "uuid": "4264c8be-47ff-40cc-9e48-58836cb22c24",
+    "historyId": "c2a713baee98e5c76a25db3cab5ac28b",
+    "fullName": "ru.iteco.fmhandroid.ui.tests.MainScreenTest.addNewClaimFromMainScreen",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.iteco.fmhandroid.ui.tests"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.iteco.fmhandroid.ui.tests.MainScreenTest"
+        },
+        {
+            "name": "testMethod",
+            "value": "addNewClaimFromMainScreen"
+        },
+        {
+            "name": "suite",
+            "value": "ru.iteco.fmhandroid.ui.tests.MainScreenTest"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: androidx.test.runner.AndroidJUnitRunner(932)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        }
+    ]
+}

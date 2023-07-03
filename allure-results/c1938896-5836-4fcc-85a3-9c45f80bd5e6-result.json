@@ -1,0 +1,53 @@
+{
+    "name": "filterNewsWithDatesAndInactiveStatus",
+    "start": 1688380973264,
+    "stop": 1688380986544,
+    "stage": "finished",
+    "description": "Фильтрация новостей по датам и неактивному статусу",
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [
+    ],
+    "attachments": [
+    ],
+    "parameters": [
+    ],
+    "uuid": "c1938896-5836-4fcc-85a3-9c45f80bd5e6",
+    "historyId": "eb4cd2af6b171d7dee7778bd884c2799",
+    "fullName": "ru.iteco.fmhandroid.ui.tests.SortAndFilterNewsTest.filterNewsWithDatesAndInactiveStatus",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.iteco.fmhandroid.ui.tests"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.iteco.fmhandroid.ui.tests.SortAndFilterNewsTest"
+        },
+        {
+            "name": "testMethod",
+            "value": "filterNewsWithDatesAndInactiveStatus"
+        },
+        {
+            "name": "suite",
+            "value": "ru.iteco.fmhandroid.ui.tests.SortAndFilterNewsTest"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: androidx.test.runner.AndroidJUnitRunner(1106)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        }
+    ]
+}

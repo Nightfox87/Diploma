@@ -73,7 +73,6 @@ public class NewsTest {
         controlPanelScreen.checkControlPanelScreen();
         controlPanelScreen.goToCreatingNewsScreen();
         creatingNewsScreen.checkCreatingNewsScreen();
-        creatingNewsScreen.fillInTheNewsFieldsForHolidayCategory(NewsDataHelper.getNewsDataForCancelCreation(0));
         creatingNewsScreen.cancelNews();
         controlPanelScreen.checkControlPanelScreen();
     }

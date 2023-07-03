@@ -50,7 +50,7 @@ public class AuthorizationScreen {
 
     @Step("Ожидание видимости названия экрана Авторизации")
     public void waitForScreenHeader() {
-        onView(isRoot()).perform(CustomViewAction.waitDisplayed(R.id.header, 15000));
+        onView(isRoot()).perform(CustomViewAction.waitDisplayed(R.id.header, 8000));
     }
 
     @Step("Авторизация с валидными данными")

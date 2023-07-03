@@ -1,0 +1,53 @@
+{
+    "name": "openTermsOfUse",
+    "start": 1688379886757,
+    "stop": 1688379898416,
+    "stage": "finished",
+    "description": "Переход к просмотру пользовательского соглашения",
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [
+    ],
+    "attachments": [
+    ],
+    "parameters": [
+    ],
+    "uuid": "d74440d9-7edc-41fd-a50e-577ba9dae8d4",
+    "historyId": "260cb0281ed5f0ade1eca6850c733d98",
+    "fullName": "ru.iteco.fmhandroid.ui.tests.AboutScreenTest.openTermsOfUse",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.iteco.fmhandroid.ui.tests"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.iteco.fmhandroid.ui.tests.AboutScreenTest"
+        },
+        {
+            "name": "testMethod",
+            "value": "openTermsOfUse"
+        },
+        {
+            "name": "suite",
+            "value": "ru.iteco.fmhandroid.ui.tests.AboutScreenTest"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: androidx.test.runner.AndroidJUnitRunner(831)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        }
+    ]
+}

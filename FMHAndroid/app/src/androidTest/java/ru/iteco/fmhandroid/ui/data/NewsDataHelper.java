@@ -39,11 +39,11 @@ public class NewsDataHelper {
     }
 
     public static NewsInfo getNewsDataForSorting(int years) {
-        return new NewsInfo("NeWs FoR SoRtInG", generateDate(years));
+        return new NewsInfo("NeWs FoR SoRtInG " + getCurrentTime(), generateDate(years));
     }
 
     public static NewsInfo getNewsDataForCancelCreation(int years) {
-        return new NewsInfo("1st May Holiday ", generateDate(years));
+        return new NewsInfo("1st May Holiday " + getCurrentTime(), generateDate(years));
     }
 
     public static NewsInfo getDataForNewsEditing(int years) {

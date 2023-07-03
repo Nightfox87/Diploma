@@ -11,6 +11,7 @@ import org.junit.runner.RunWith;
 
 import io.qameta.allure.android.runners.AllureAndroidJUnit4;
 import io.qameta.allure.kotlin.Description;
+import io.qameta.allure.kotlin.Flaky;
 import ru.iteco.fmhandroid.ui.AppActivity;
 import ru.iteco.fmhandroid.ui.data.AuthDataHelper;
 import ru.iteco.fmhandroid.ui.data.ClaimsDataHelper;
@@ -48,6 +49,7 @@ public class ClaimsTest {
     ClaimInfoScreen claimInfoScreen = new ClaimInfoScreen();
 
     @Test
+    @Flaky
     @Description("Создание заявки")
     public void creatingClaimTest() {
         claimsScreen.goToCreatingClaim();

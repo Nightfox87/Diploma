@@ -1,0 +1,53 @@
+{
+    "name": "authWithIncorrectLogin",
+    "start": 1688379973310,
+    "stop": 1688379977936,
+    "stage": "finished",
+    "description": "Авторизация в приложение с некорректным логином",
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [
+    ],
+    "attachments": [
+    ],
+    "parameters": [
+    ],
+    "uuid": "783fca57-6d18-4e6e-ac58-94e3832c0825",
+    "historyId": "3aeca9fe51e8a24f46e0a033cf2a8785",
+    "fullName": "ru.iteco.fmhandroid.ui.tests.AuthTest.authWithIncorrectLogin",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.iteco.fmhandroid.ui.tests"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.iteco.fmhandroid.ui.tests.AuthTest"
+        },
+        {
+            "name": "testMethod",
+            "value": "authWithIncorrectLogin"
+        },
+        {
+            "name": "suite",
+            "value": "ru.iteco.fmhandroid.ui.tests.AuthTest"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: androidx.test.runner.AndroidJUnitRunner(841)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        }
+    ]
+}

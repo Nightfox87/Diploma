@@ -11,6 +11,7 @@ import org.junit.runner.RunWith;
 
 import io.qameta.allure.android.runners.AllureAndroidJUnit4;
 import io.qameta.allure.kotlin.Description;
+import io.qameta.allure.kotlin.Flaky;
 import ru.iteco.fmhandroid.ui.AppActivity;
 import ru.iteco.fmhandroid.ui.data.AuthDataHelper;
 import ru.iteco.fmhandroid.ui.data.ClaimsDataHelper;
@@ -52,6 +53,7 @@ public class ClaimsStatusTest {
     EditingClaimsScreen editClaim = new EditingClaimsScreen();
 
     @Test
+    @Flaky
     @Description("Изменение статуса заявки с В работе на Выполнена")
     public void changeClaimStatusToExecuted() {
         creatingClaimsScreen.fillInCreatingClaimFields(ClaimsDataHelper.getInfoForExecutedStatus(0));
@@ -67,6 +69,7 @@ public class ClaimsStatusTest {
     }
 
     @Test
+    @Flaky
     @Description("Редактирование заявки со статусом Открыта")
     public void editClaimWithOpenStatus() {
         creatingClaimsScreen.fillInCreatingClaimFields(ClaimsDataHelper.getInfoForClaimEditing(0));
@@ -85,6 +88,7 @@ public class ClaimsStatusTest {
     }
 
     @Test
+    @Flaky
     @Description("Изменение статуса заявки с Открыта на Отменена")
     public void changeClaimStatusToCancelled() {
         creatingClaimsScreen.fillInCreatingClaimFields(ClaimsDataHelper.getInfoForCancelledStatus(0));

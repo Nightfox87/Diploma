@@ -1,0 +1,53 @@
+{
+    "name": "authWithCorrectDataAndLogout",
+    "start": 1688379962430,
+    "stop": 1688379973304,
+    "stage": "finished",
+    "description": "Успешная авторизация в приложение",
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [
+    ],
+    "attachments": [
+    ],
+    "parameters": [
+    ],
+    "uuid": "ec86c0b4-d3f0-479f-8cce-824f6ccfafdf",
+    "historyId": "83f58173e9fc8faf45deb016abaabbd9",
+    "fullName": "ru.iteco.fmhandroid.ui.tests.AuthTest.authWithCorrectDataAndLogout",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.iteco.fmhandroid.ui.tests"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.iteco.fmhandroid.ui.tests.AuthTest"
+        },
+        {
+            "name": "testMethod",
+            "value": "authWithCorrectDataAndLogout"
+        },
+        {
+            "name": "suite",
+            "value": "ru.iteco.fmhandroid.ui.tests.AuthTest"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: androidx.test.runner.AndroidJUnitRunner(841)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        }
+    ]
+}

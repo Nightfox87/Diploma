@@ -38,7 +38,7 @@ public class MainScreen {
 
     @Step("Ожидание появления названия приложения")
     public void waitForAppName() {
-        onView(isRoot()).perform(CustomViewAction.waitDisplayed(R.id.trademark_image_view, 10000));
+        onView(isRoot()).perform(CustomViewAction.waitDisplayed(R.id.trademark_image_view, 5000));
     }
 
     @Step("Переход на экран Новости из основного меню вверху экрана")

@@ -1,0 +1,53 @@
+{
+    "name": "editTitleInNewsAndSave",
+    "start": 1688380615003,
+    "stop": 1688380633360,
+    "stage": "finished",
+    "description": "Редактирование заголовка новости с сохранением",
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [
+    ],
+    "attachments": [
+    ],
+    "parameters": [
+    ],
+    "uuid": "e2b78dc8-abf3-48b9-8eba-38d1e617b5bd",
+    "historyId": "52264c8925ffff9d5e3881e885e027a1",
+    "fullName": "ru.iteco.fmhandroid.ui.tests.NewsTest.editTitleInNewsAndSave",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.iteco.fmhandroid.ui.tests"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.iteco.fmhandroid.ui.tests.NewsTest"
+        },
+        {
+            "name": "testMethod",
+            "value": "editTitleInNewsAndSave"
+        },
+        {
+            "name": "suite",
+            "value": "ru.iteco.fmhandroid.ui.tests.NewsTest"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: androidx.test.runner.AndroidJUnitRunner(1021)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        }
+    ]
+}

@@ -1,0 +1,53 @@
+{
+    "name": "goToLoveIsAllScreen",
+    "start": 1688380478240,
+    "stop": 1688380489969,
+    "stage": "finished",
+    "description": "Переход на экран Цитаты",
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [
+    ],
+    "attachments": [
+    ],
+    "parameters": [
+    ],
+    "uuid": "e8a9faf9-4676-499e-8a93-e9fe105a2d85",
+    "historyId": "a3a617e4d2f6a3cab0982a2ffa0f59a6",
+    "fullName": "ru.iteco.fmhandroid.ui.tests.NavigationTest.goToLoveIsAllScreen",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.iteco.fmhandroid.ui.tests"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.iteco.fmhandroid.ui.tests.NavigationTest"
+        },
+        {
+            "name": "testMethod",
+            "value": "goToLoveIsAllScreen"
+        },
+        {
+            "name": "suite",
+            "value": "ru.iteco.fmhandroid.ui.tests.NavigationTest"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: androidx.test.runner.AndroidJUnitRunner(971)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        }
+    ]
+}
